@@ -1,0 +1,5 @@
+{
+  "name": "Yahoo Study AI",
+  "description": "An AI-powered study assistant for NCERT subjects (classes 9-12). It offers line-by-line explanations with a friendly AI personality and generates diagrams or charts to aid in understanding complex topics.",
+  "requestFramePermissions": []
+}
