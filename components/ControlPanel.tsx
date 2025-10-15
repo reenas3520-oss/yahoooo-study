@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo, useEffect } from 'react';
 import { NCERT_DATA } from '../constants';
 import type { StudyTopic } from '../types';
@@ -36,10 +35,10 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   onGenerateDiagram,
   isBusy 
 }) => {
-  const [selectedClass, setSelectedClass] = useState<keyof typeof NCERT_DATA>('10');
+  const [selectedClass, setSelectedClass] = useState<keyof typeof NCERT_DATA>('9');
   const [selectedSubject, setSelectedSubject] = useState('Science');
   const [selectedBook, setSelectedBook] = useState('NCERT');
-  const [selectedChapter, setSelectedChapter] = useState('Chemical Reactions and Equations');
+  const [selectedChapter, setSelectedChapter] = useState('Matter in Our Surroundings');
   const [diagramCount, setDiagramCount] = useState<number>(1);
 
   const subjects = useMemo(() => Object.keys(NCERT_DATA[selectedClass]), [selectedClass]);
@@ -55,16 +54,16 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   }, [selectedClass, selectedSubject]);
 
   useEffect(() => {
-    const classData = NCERT_DATA[selectedClass];
-    const subjectData = classData[selectedSubject as keyof typeof classData];
+    const classData = NCERT_DATA[selectedClass] as any;
+    const subjectData = classData[selectedSubject];
     const newBooks = Object.keys(subjectData || {});
     if (!newBooks.includes(selectedBook)) setSelectedBook(newBooks[0] || '');
   }, [selectedClass, selectedSubject, selectedBook]);
 
   useEffect(() => {
-    const classData = NCERT_DATA[selectedClass];
-    const subjectData = classData[selectedSubject as keyof typeof classData];
-    const bookData = subjectData ? subjectData[selectedBook as keyof typeof subjectData] : undefined;
+    const classData = NCERT_DATA[selectedClass] as any;
+    const subjectData = classData[selectedSubject];
+    const bookData = subjectData ? subjectData[selectedBook] : undefined;
     const newChapters = Array.isArray(bookData) ? bookData : [];
     if (!newChapters.includes(selectedChapter)) setSelectedChapter(newChapters[0] || '');
   }, [selectedClass, selectedSubject, selectedBook, selectedChapter]);
